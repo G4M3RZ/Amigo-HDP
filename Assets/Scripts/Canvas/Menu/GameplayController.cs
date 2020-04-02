@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameplayController : MonoBehaviour
 {
     public GameObject _fade;
-    public AudioSource _soundTrack;
+    private AudioSource _soundTrack;
     
     private string _newSceneName;
 
@@ -19,6 +19,7 @@ public class GameplayController : MonoBehaviour
     {
         _time = _timer;
         _lock = false;
+        _soundTrack = GameObject.Find("SoundTruck").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -35,14 +36,11 @@ public class GameplayController : MonoBehaviour
                 Instantiate(_fade, transform.position, transform.rotation);
                 _lock = false;
             }
+
             if (_time <= 0)
-            {
                 SceneManager.LoadScene(_newSceneName);
-            }
             else
-            {
                 _time -= Time.deltaTime;
-            }
         }
     }
 

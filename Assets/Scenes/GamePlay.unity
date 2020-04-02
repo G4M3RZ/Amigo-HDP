@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fade: {fileID: 2471218973493701379, guid: de6a414dd9b07da4eb4b75ccb6e9db96, type: 3}
-  _soundTrack: {fileID: 0}
   _timer: 2
 --- !u!1 &322349211
 GameObject:

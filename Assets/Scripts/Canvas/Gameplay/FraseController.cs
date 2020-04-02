@@ -33,13 +33,9 @@ public class FraseController : MonoBehaviour
             _newNum = Random.Range(0, _frases.Length);
 
             if(!_numFrase.Contains(_newNum))
-            {
                 _numFrase.Add(_newNum);
-            }
             else
-            {
                 i--;
-            }
         }
     }
 
