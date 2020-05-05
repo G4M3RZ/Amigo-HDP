@@ -6,42 +6,41 @@ using UnityEngine.SceneManagement;
 public class GameplayController : MonoBehaviour
 {
     public GameObject _fade;
-    private AudioSource _soundTrack;
+    private MuteImages _muteController;
     
     private string _newSceneName;
 
-    private bool _lock;
     [Range(0,5)]
     public float _timer;
     private float _time;
+    private bool _lock;
 
     private void Start()
     {
+        _newSceneName = null;
         _time = _timer;
         _lock = false;
-        _soundTrack = GameObject.Find("SoundTruck").GetComponent<AudioSource>();
+        _muteController = transform.GetChild(0).GetComponent<MuteImages>();
     }
 
     private void Update()
     {
-        CambioDeScena();
+        if(_newSceneName != null)
+            CambioDeScena();
     }
 
     void CambioDeScena()
     {
-        if (_newSceneName != null)
+        if (_lock)
         {
-            if (_lock)
-            {
-                Instantiate(_fade, transform.position, transform.rotation);
-                _lock = false;
-            }
-
-            if (_time <= 0)
-                SceneManager.LoadScene(_newSceneName);
-            else
-                _time -= Time.deltaTime;
+            Instantiate(_fade, transform.position, transform.rotation);
+            _lock = false;
         }
+
+        if (_time <= 0)
+            SceneManager.LoadScene(_newSceneName);
+        else
+            _time -= Time.deltaTime;
     }
 
     #region Buttons
@@ -51,21 +50,9 @@ public class GameplayController : MonoBehaviour
         _lock = true;
     }
 
-    public void Mute()
+    public void Mute(bool _isMuted)
     {
-        if(_soundTrack.volume != 0)
-        {
-            _soundTrack.volume = 0;
-        }
-        else
-        {
-            _soundTrack.volume = 1;
-        }
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
+        _muteController.ChangeImages(_isMuted);
     }
     #endregion
 }

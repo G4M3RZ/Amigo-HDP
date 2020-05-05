@@ -5,10 +5,12 @@ using TMPro;
 
 public class FraseController : MonoBehaviour
 {
+    public Material _shader;
+
     public string[] _frases;
     List<int> _numFrase;
-    public TextMeshProUGUI _text;
-    public Material _shader;
+
+    private TextMeshProUGUI _text;
 
     private int _showNumFrase, _newNum;
     private bool _activador;
@@ -18,6 +20,9 @@ public class FraseController : MonoBehaviour
     {
         _showNumFrase = 0;
         _numFrase = new List<int>();
+
+        _text = transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+
         Seleccionador();
     }
 
@@ -50,9 +55,8 @@ public class FraseController : MonoBehaviour
             if (_fade == 1)
             {
                 if (_showNumFrase != 0 && _showNumFrase <= _frases.Length)
-                {
                     _text.text = _frases[_numFrase[_showNumFrase - 1]];
-                }
+
                 _activador = false;
             }
         }

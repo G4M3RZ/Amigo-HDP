@@ -5,7 +5,6 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
 
     private static AudioManager _audioScript;
-
 	void Start ()
     {
         if (_audioScript == null)
@@ -14,8 +13,6 @@ public class AudioManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         }
         else
-        {
             Destroy(gameObject);
-        }
     }
 }
