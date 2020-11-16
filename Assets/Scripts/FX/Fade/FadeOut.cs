@@ -1,26 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FadeOut : MonoBehaviour {
 
-    public Material ColorInicial;
-    [Range(0,1)]
-    public float Speed = 0.5f;
+    [Range(0, 1)]
+    public float _speed = 0.5f;
+    private Image _image;
+    private Color _fadeColor;
+    [HideInInspector]
+    public string _sceneName;
 
-    private float alpha = 0f;
-
-    void Start()
+    void Awake()
     {
-        alpha = 0f;
-        gameObject.GetComponent<SpriteRenderer>().material = ColorInicial;
-        ColorInicial.color = new Color(0, 0, 0, alpha);
+        _image = GetComponent<Image>();
+        _fadeColor = Color.black;
+        _fadeColor.a = 0;
+        _image.color = _fadeColor;
     }
 
     public void Update()
     {
-        gameObject.GetComponent<SpriteRenderer>().material = ColorInicial;
-        ColorInicial.color = new Color(0, 0, 0, alpha);
-        alpha = (alpha < 1) ? alpha += Speed * Time.deltaTime : alpha = 1;
+        _fadeColor.a = (_fadeColor.a < 1) ? _fadeColor.a += Time.deltaTime * _speed : _fadeColor.a = 1;
+        _image.color = _fadeColor;
+
+        if (_fadeColor.a == 1)
+            SceneManager.LoadScene(_sceneName);
     }
 }

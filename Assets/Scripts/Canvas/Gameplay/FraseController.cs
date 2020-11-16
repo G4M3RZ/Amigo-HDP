@@ -21,16 +21,14 @@ public class FraseController : MonoBehaviour
         _showNumFrase = 0;
         _numFrase = new List<int>();
 
-        _text = transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        _text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         Seleccionador();
     }
-
     private void Update()
     {
         MostradorDeFrases();
     }
-
     void Seleccionador()
     {
         for (int i = 0; i < _frases.Length; i++)
@@ -43,7 +41,6 @@ public class FraseController : MonoBehaviour
                 i--;
         }
     }
-
     void MostradorDeFrases()
     {
         _shader.SetFloat("_Fade", _fade);
@@ -65,12 +62,9 @@ public class FraseController : MonoBehaviour
             _fade = (_fade > 0) ? _fade -= Time.deltaTime / 2 : _fade = 0;
         }
     }
-
-    #region Buttons
     public void Next()
     {
         _showNumFrase++;
         _activador = true;
     }
-    #endregion
 }

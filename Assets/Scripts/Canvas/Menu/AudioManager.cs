@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
     private static AudioManager _audioScript;
-	void Start ()
+
+	void Awake()
     {
         if (_audioScript == null)
         {

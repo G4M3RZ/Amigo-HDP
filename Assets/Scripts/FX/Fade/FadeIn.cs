@@ -1,34 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class FadeIn : MonoBehaviour {
 
-    public Material ColorInicial;
     [Range(0, 1)]
-    public float Speed = 0.5f;
+    public float _speed = 0.5f;
+    private Image _image;
+    private Color _fadeColor;
 
-    private float alpha = 1f;
-
-	void Start ()
+	void Awake ()
     {
-        alpha = 1f;
-        GetComponent<SpriteRenderer>().material = ColorInicial;
-        ColorInicial.color = new Color(0, 0, 0, alpha);
+        _image = GetComponent<Image>();
+        _fadeColor = Color.black;
+        _fadeColor.a = 1;
+        _image.color = _fadeColor;
     }
-	
-	public void Update ()
-    {
-        GetComponent<SpriteRenderer>().material = ColorInicial;
-        ColorInicial.color = new Color(0, 0, 0, alpha);
 
-        if (alpha >= 0)
-        {
-            alpha -= Speed * Time.deltaTime;
-        }
-        else
-        {
+    public void Update()
+    {
+        _fadeColor.a = (_fadeColor.a > 0) ? _fadeColor.a -= Time.deltaTime * _speed : _fadeColor.a = 0;
+        _image.color = _fadeColor;
+
+        if (_fadeColor.a == 0)
             Destroy(this.gameObject);
-        }
-	}
+    }
 }
